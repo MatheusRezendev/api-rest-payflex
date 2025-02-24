@@ -17,7 +17,7 @@ export type AtualizarUserDto = {
 }
 
 export type ListarUserDto = {
-    id: string;
+    id?: string;
     nome: string;
     email: string;
     tipo: UserType;
@@ -34,7 +34,7 @@ export type UserResponseDto = {
 
 export interface UserService {
     save(userDto: CriarUserDto): Promise<UserResponseDto>;
-    list(filters?: ListarUserDto); Promise<UserResponseDto[]>;
+    list(filters?: ListarUserDto): Promise<UserResponseDto[]>;
     findById(id: string): Promise<UserResponseDto | null>;
     update(id: string, userDto: AtualizarUserDto): Promise<UserResponseDto>;
     delete(id: string): Promise<void>;    
