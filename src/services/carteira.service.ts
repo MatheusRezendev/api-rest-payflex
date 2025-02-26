@@ -1,10 +1,10 @@
 export type CriarCarteiraDTO = {
-    saldoInicial?: number;
+    saldoInicial: number;
     userId: string;
 }
 
 export type AtualizarCarteiraDTO = {
-    saldo?: number;
+    saldo: number;
 }
 
 export type CarteiraResponseDTO = {
@@ -17,4 +17,5 @@ export interface CarteiraService {
     getSaldo(userId: string): Promise<number>;
     adicionarSaldo(userId: string, valor: number): Promise<void>;
     removerSaldo(userId: string, valor: number): Promise<void>;
+    atualizarSaldo(userId: string, novoSaldo: number): Promise<void>;
 }

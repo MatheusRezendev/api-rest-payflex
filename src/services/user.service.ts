@@ -9,20 +9,6 @@ export type CriarUserDto = {
     cnpj?: string
 };
 
-export type AtualizarUserDto = {
-    nome?: string;
-    email?: string;
-    senha?: string;
-    tipo?: UserType;
-}
-
-export type ListarUserDto = {
-    id?: string;
-    nome: string;
-    email: string;
-    tipo: UserType;
-}
-
 export type UserResponseDto = {
     id: string;
     nome: string;
@@ -34,8 +20,8 @@ export type UserResponseDto = {
 
 export interface UserService {
     save(userDto: CriarUserDto): Promise<UserResponseDto>;
-    list(filters?: ListarUserDto): Promise<UserResponseDto[]>;
+    list(): Promise<UserResponseDto[]>;
     findById(id: string): Promise<UserResponseDto | null>;
-    update(id: string, userDto: AtualizarUserDto): Promise<UserResponseDto>;
+    findByEmail(email: string): Promise<UserResponseDto | null>;
     delete(id: string): Promise<void>;    
 }
