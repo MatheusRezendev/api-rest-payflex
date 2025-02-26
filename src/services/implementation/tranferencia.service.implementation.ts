@@ -1,7 +1,7 @@
 import { StatusTranferencia, Transferencia } from "../../entities/transferencia";
 import { CarteiraRepository } from "../../repositories/carteira.repositories";
 import { TransferenciaRepository } from "../../repositories/transferencia.repositories";
-import { CriarTransferenciaDTO, TransferenciaResponseDTO, TransferenciaService } from "../transfer.service";
+import { CriarTransferenciaDTO, TransferenciaResponseDTO, TransferenciaService } from "../transferencia.service";
 
 export class TranferenciaServiceImplementation implements TransferenciaService{
     private constructor(readonly repository: TransferenciaRepository,
@@ -23,9 +23,9 @@ export class TranferenciaServiceImplementation implements TransferenciaService{
 
         await this.repository.save(transferencia);
 
-        await this.carteiraRepository.atualizarSaldo(dto.idUserEnvia,saldoAtual - dto.valor);
+        await this.carteiraRepository.alterarSaldo(dto.idUserEnvia,saldoAtual - dto.valor);
         const saldoRecebedor = await this.carteiraRepository.getSaldo(dto.idUserRecebe);
-        await this.carteiraRepository.atualizarSaldo(dto.idUserRecebe, saldoRecebedor + dto.valor);
+        await this.carteiraRepository.alterarSaldo(dto.idUserRecebe, saldoRecebedor + dto.valor);
 
         return {
             id: transferencia.id,
