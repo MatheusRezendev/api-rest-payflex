@@ -17,15 +17,15 @@ export type TransferenciaProps = {
 export class Transferencia {
     private constructor(readonly props: TransferenciaProps) {}
 
-    public static build(idUserEnvia: string, idUserRecebe: string, valor: number) {
+    public static build(idUserEnvia: string, idUserRecebe: string, valor: number, status: StatusTranferencia = StatusTranferencia.pendente, dataCriacao: Date = new Date()) {
         return new Transferencia({
             id: crypto.randomUUID().toString(),
             idUserEnvia,
             idUserRecebe,
             valor,
-            status: StatusTranferencia.pendente,
-            dataCriacao: new Date()
-        })
+            status,
+            dataCriacao 
+        });
     }
 
     public get id() {

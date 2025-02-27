@@ -4,8 +4,8 @@ export type UserProps = {
     id: string;
     nome: string;
     email: string;
-    cpf?: string;
-    cnpj?: string;
+    cpf?: string | null;
+    cnpj?: string | null;
     senha: string;
     tipo: UserType;
 }
@@ -41,6 +41,10 @@ export class User {
 
     public get email() {
         return this.props.email;
+    }
+
+    public get senha() {
+        return this.props.senha;
     }
 
     public get cpf() {
