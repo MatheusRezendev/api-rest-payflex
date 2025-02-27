@@ -9,6 +9,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  @@map("usuarios")
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  tipo      String
+  cpf       String?  @unique
+  cnpj      String?  @unique
+  carteira  Carteira?
+}
+
+model Carteira {
+  @@map("carteiras")
+  id        String  @id @default(uuid())
+  saldo     Float
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id])
+}
+
+model Transferencia {
+  @@map("transferencias")
+  id          String          @id @default(uuid())
+  idUserEnvia String
+  idUserRecebe String
+  valor       Float
+  status      StatusTranferencia
+  dataCriacao DateTime        @default(now())
+}
+
+enum StatusTranferencia {
+  pendente
+  concluida
+  cancelada
 }

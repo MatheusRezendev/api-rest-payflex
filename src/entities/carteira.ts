@@ -32,8 +32,13 @@ export class Carteira {
     }
 
     public removerSaldo(valor: number) {
-        if(valor <= 0)throw new Error("Valor inserido maior que o saldo");
+        if(valor <= 0)throw new Error("Valor inserido deve ser maior que 0");
         if(this.props.saldo < valor) throw new Error("Saldo insuficiente");
         this.props.saldo -= valor;
+    }
+
+    public atualizarSaldo(novoSaldo: number) {
+        if (novoSaldo < 0) throw new Error("O saldo não pode ser negativo.");
+        this.props.saldo = novoSaldo;
     }
 }

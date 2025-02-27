@@ -18,4 +18,5 @@ export interface CarteiraService {
     adicionarSaldo(userId: string, valor: number): Promise<void>;
     removerSaldo(userId: string, valor: number): Promise<void>;
     atualizarSaldo(userId: string, novoSaldo: number): Promise<void>;
+    criarCarteira(userId: string, saldoInicial: number): Promise<void>;
 }

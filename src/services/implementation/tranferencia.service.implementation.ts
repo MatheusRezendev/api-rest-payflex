@@ -23,9 +23,9 @@ export class TranferenciaServiceImplementation implements TransferenciaService{
 
         await this.repository.save(transferencia);
 
-        await this.carteiraRepository.alterarSaldo(dto.idUserEnvia,saldoAtual - dto.valor);
+        await this.carteiraRepository.atualizarSaldo(dto.idUserEnvia,saldoAtual - dto.valor);
         const saldoRecebedor = await this.carteiraRepository.getSaldo(dto.idUserRecebe);
-        await this.carteiraRepository.alterarSaldo(dto.idUserRecebe, saldoRecebedor + dto.valor);
+        await this.carteiraRepository.atualizarSaldo(dto.idUserRecebe, saldoRecebedor + dto.valor);
 
         return {
             id: transferencia.id,

@@ -15,6 +15,20 @@ export class UserServiceImplementation implements UserService{
             throw new Error("Email ja cadastrado");
         }
 
+        if (userDto.cpf) {
+            const cpfExistente = await this.repository.findByCpf(userDto.cpf);
+            if (cpfExistente) {
+                throw new Error("CPF já cadastrado.");
+            }
+        }
+    
+        if (userDto.cnpj) {
+            const cnpjExistente = await this.repository.findByCnpj(userDto.cnpj);
+            if (cnpjExistente) {
+                throw new Error("CNPJ já cadastrado.");
+            }
+        }
+
         const user = User.build(userDto.nome, userDto.email, userDto.senha, userDto.tipo, userDto.cpf, userDto.cnpj);
         await this.repository.save(user);
 
